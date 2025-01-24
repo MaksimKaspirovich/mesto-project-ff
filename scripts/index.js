@@ -10,9 +10,8 @@ const popupNewCard = document.querySelector(".popup_type_new-card");
 const addCardButton = document.querySelector(".profile__add-button");
 const cardsList = content.querySelector(".places__list");
 const popupButton = popupNewCard.querySelector(".popup__button");
-const cardImage = cardElement.querySelector('.card__image');
-const cardTitle = cardElement.querySelector('.card__title');
-
+const cardImage = cardElement.querySelector(".card__image");
+const cardTitle = cardElement.querySelector(".card__title");
 
 // @todo: Функция создания карточки
 addCardButton.addEventListener("click", () => {
@@ -24,16 +23,16 @@ popupButton.addEventListener("click", (evt) => {
   const name = popupNewCard.querySelector(".popup__input_type_card-name").value;
   const link = popupNewCard.querySelector(".popup__input_type_url").value;
   createCard(name, link);
- 
+
   name.value = "";
   link.value = "";
   popupNewCard.classList.remove("popup_is-opened");
 });
 
-function createCard(name, link, onDelete) {
+function createCard(name, link) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardTitle = cardElement.querySelector('.card__title');
-  const cardImage = cardElement.querySelector('.card__image');
+  const cardTitle = cardElement.querySelector(".card__title");
+  const cardImage = cardElement.querySelector(".card__image");
   const deleteCard = cardElement.querySelector(".card__delete-button");
 
   cardTitle.textContent = name;
@@ -45,21 +44,19 @@ function createCard(name, link, onDelete) {
   return cardElement;
 }
 
-
-
 // @todo: Функция удаления карточки
 function handleDeleteCard(deleteCard) {
-  deleteCard.addEventListener('click', () => { 
-    const cardDelete = deleteCard.closest('.card'); 
-    cardDelete.remove(); 
-  })};
-  
+  deleteCard.addEventListener("click", () => {
+    const cardDelete = deleteCard.closest(".card");
+    cardDelete.remove();
+  });
+}
+
 // @todo: Вывести карточки на страницу
 function renderCard(cardElement) {
   cardsList.append(cardElement);
-
 }
 
 initialCards.forEach((card) => {
-  renderCard(createCard(card.name, card.link))
-})
+  renderCard(createCard(card.name, card.link));
+});
