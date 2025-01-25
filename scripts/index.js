@@ -22,25 +22,25 @@ popupButton.addEventListener("click", (evt) => {
   evt.preventDefault();
   const name = popupNewCard.querySelector(".popup__input_type_card-name").value;
   const link = popupNewCard.querySelector(".popup__input_type_url").value;
-  createCard(name, link);
+  const card = { name: name, link: link };
+  renderCard(createCard(card));
 
   name.value = "";
   link.value = "";
   popupNewCard.classList.remove("popup_is-opened");
 });
 
-function createCard(name, link) {
+function createCard(card) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
   const cardImage = cardElement.querySelector(".card__image");
   const deleteCard = cardElement.querySelector(".card__delete-button");
 
-  cardTitle.textContent = name;
-  cardImage.src = link;
-  cardImage.alt = name;
+  cardTitle.textContent = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
 
   handleDeleteCard(deleteCard);
-  renderCard(cardElement);
   return cardElement;
 }
 
@@ -58,5 +58,5 @@ function renderCard(cardElement) {
 }
 
 initialCards.forEach((card) => {
-  renderCard(createCard(card.name, card.link));
+  renderCard(createCard(card));
 });
