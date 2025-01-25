@@ -20,14 +20,14 @@ addCardButton.addEventListener("click", () => {
 
 popupButton.addEventListener("click", (evt) => {
   evt.preventDefault();
-  const name = popupNewCard.querySelector(".popup__input_type_card-name").value;
-  const link = popupNewCard.querySelector(".popup__input_type_url").value;
-  const card = { name: name, link: link };
-  renderCard(createCard(card));
-
+  const name = popupNewCard.querySelector(".popup__input_type_card-name");
+  const link = popupNewCard.querySelector(".popup__input_type_url");
+  const card = { name: name.value, link: link.value };
+  
   name.value = "";
   link.value = "";
   popupNewCard.classList.remove("popup_is-opened");
+  renderCard(createCard(card));
 });
 
 function createCard(card) {
