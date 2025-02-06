@@ -3,9 +3,8 @@ export function openPopup(popup) {
   popup.classList.add("popup_is-opened");
   document.addEventListener("keydown", closePopupWithKeyboard);
   popup.addEventListener("click", closePopupWithTouchOverlay);
-
 }
-
+// Закрытие попапа
 export function closePopup(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", closePopupWithKeyboard);

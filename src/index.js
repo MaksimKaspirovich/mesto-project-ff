@@ -28,7 +28,7 @@ const jobInput = formElement.querySelector(".popup__input_type_description");
 const profileTitle = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__description");
 
-const closesButton = document.querySelectorAll(".popup__close");
+const closesButtons = document.querySelectorAll(".popup__close");
 
 // Слушатель клика для вызова попапа для создания карточки
 profileAddCardButton.addEventListener("click", () => openPopup(popupNewCard));
@@ -50,10 +50,14 @@ function handleCardSubmit(evt) {
 newCard.addEventListener("submit", handleCardSubmit);
 
 // Слушатель клика для вызова попапа редактирования профиля
-profileEditButton.addEventListener("click", () => openPopup(popupEdit));
+profileEditButton.addEventListener("click", () => {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(popupEdit);
+});
 
 // Функция-бработчик редактирования профиля
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -61,10 +65,10 @@ function handleFormSubmit(evt) {
 }
 
 // Слушатель клика для сохранения профиля
-formElement.addEventListener("submit", handleFormSubmit);
+formElement.addEventListener("submit", handleProfileFormSubmit);
 
 // Закрытие попапа по крестику
-closesButton.forEach(function (button) {
+closesButtons.forEach(function (button) {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => {
     closePopup(popup);
