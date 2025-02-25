@@ -7,12 +7,11 @@ import {
 import { openPopup, closePopup } from "./components/modal.js";
 import { enableValidation, clearValidation } from "./components/validation.js";
 import {
-  getUserApi,
+  getUserData,
   getCardInfoApi,
   editProfileApi,
   addCardApi,
   updateAvatar,
-  deleteCard,
 } from "./components/api.js";
 
 //Переменная для вставки карточки на страницу
@@ -46,6 +45,8 @@ const formAvatar = document.querySelector(
 );
 const buttonChangeAvatar = popupAvatar.querySelector(".popup__button");
 const inputAvatar = popupAvatar.querySelector(".popup__input_type_avatar");
+
+let userId;
 
 
 // Функция для отображения сохранения данных
@@ -93,18 +94,17 @@ function handleChangeAvatar(evt) {
 buttonChangeAvatar.addEventListener("click", handleChangeAvatar);
 
 // Отправление карточки на сервер
-Promise.all([getUserApi(), getCardInfoApi()])
-  .then(([userApi, cardInfoApi]) => {
+Promise.all([getUserData(), getCardInfoApi()])
+  .then(([userData, cardInfoApi]) => {
     profileAvatar.setAttribute(
       "style",
-      `background-image: url('${userApi.avatar}')`
+      `background-image: url('${userData.avatar}')`
     );
-    let userId = userApi._id;
-    profileTitle.textContent = userApi.name;
-    profileJob.textContent = userApi.about;
-    profileAvatar.style.backgroundImage = `url(${userApi.avatar})`;
-    console.log(userId);
-    cardInfoApi.forEach((item) => {
+    userId = userData._id;
+    profileTitle.textContent = userData.name;
+    profileJob.textContent = userData.about;
+    profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
+    cardInfoApi.forEach((item) => {userData
       const cardItem = createCard(
         item,
         handleDeleteCard,
@@ -136,7 +136,6 @@ function handleCardSubmit(evt) {
         createCard(res, handleDeleteCard, handleLikeButton, handleOpenImage)
       );
       newCard.reset();
-      console.log(res);
       closePopup(popupNewCard);
     })
     .catch((err) => console.log(err))

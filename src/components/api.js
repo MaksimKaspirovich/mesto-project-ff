@@ -14,7 +14,7 @@ const getResponse = (res) => {
 };
 
 // Получаем информацию о пользователе, появляются name, avatar, about, _id, cohort
-export const getUserApi = () => {
+export const getUserData = () => {
   return fetch(`${config.url}/users/me`, {
     headers: config.headers,
   }).then(getResponse);
