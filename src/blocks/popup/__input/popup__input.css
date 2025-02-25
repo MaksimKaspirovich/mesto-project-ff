@@ -8,7 +8,7 @@
   line-height: 18px;
   box-sizing: border-box;
   padding: 10px 0 0;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .popup__input:last-of-type {
@@ -22,4 +22,10 @@
   }
 }
 
-
+.popup__input-error {
+  display: block;
+    opacity: 0;
+    font-size: 9px;
+    color: #FF0000;
+    position: absolute;
+}

@@ -5,7 +5,7 @@ import {
   handleLikeButton,
 } from "./components/card.js";
 import { openPopup, closePopup } from "./components/modal.js";
-import { enableValidation, clearValidation } from "./components/validation.js";
+import { enableValidation, clearValidation, hideInputError } from "./components/validation.js";
 import {
   getUserData,
   getCardInfoApi,
@@ -53,6 +53,8 @@ let userId;
 function renderLoading(isButton, isLoading) {
   if (isLoading) {
     isButton.textContent = "Сохранение...";
+  } else {
+    isButton.textContent = "Сохранить";
   }
 }
 
@@ -68,6 +70,7 @@ const validationConfig = {
 
 // Слушатель клика для вызова попапа изменения аватара
 profileAvatar.addEventListener("click", () => {
+  formAvatar.reset();
   clearValidation(formAvatar, validationConfig);
   openPopup(popupAvatar);
 });
