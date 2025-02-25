@@ -3,6 +3,7 @@ import {
   addLike,
   deleteLike,
 } from "../components/api.js";
+
 // Функция создания карточки
 export function createCard(
   card,
@@ -21,6 +22,17 @@ export function createCard(
   const likeCounter = cardElement.querySelector(".card__like-counter");
   //Передаем данные для карточки
   likeCounter.textContent = card.likes.length;
+
+    // Удаление именно нашей карточки
+    const deleteCard = cardElement.querySelector(".card__delete-button");
+    if (userId === card.owner._id) {
+      deleteCard.addEventListener("click", () => {
+        handleDeleteCard(cardElement, card._id);
+      });
+    } else {
+      deleteCard.remove();
+    }
+
   //Проверка ставил ли пользователь лайк
   const isLiked = card.likes.some((item) => {
     return item._id === userId;
@@ -42,15 +54,7 @@ export function createCard(
   // Увеличение размера изображения
   cardImage.addEventListener("click", () => handleOpenImage(card));
 
-  // Удаление именно нашей карточки
-  const deleteCard = cardElement.querySelector(".card__delete-button");
-  if (userId === card.owner._id) {
-    deleteCard.addEventListener("click", () => {
-      handleDeleteCard(cardElement, card._id);
-    });
-  } else {
-    deleteCard.remove();
-  }
+
 
   // Возвращаем карточку
   return cardElement;

@@ -133,7 +133,7 @@ function handleCardSubmit(evt) {
   addCardApi(inputCardName.value, inputCardLink.value)
     .then((res) => {
       cardsList.prepend(
-        createCard(res, handleDeleteCard, handleLikeButton, handleOpenImage)
+        createCard(res, handleDeleteCard, handleLikeButton, handleOpenImage, userId)
       );
       newCard.reset();
       closePopup(popupNewCard);
